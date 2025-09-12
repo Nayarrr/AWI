@@ -1,6 +1,5 @@
-<app-student-card [student] = "student1"/>
+@for (student of students; track student.id){
+    <app-student-card [student] = "student" (remove) = "onDelete($event)"></app-student-card>
+}
 
-<app-student-card [student] = "student2"/>
-
-<app-student-card [student] = "student3"/>
-<!-- <app-student-card (remove)="onDelete($event)"></app-student-card> -->
+<button (click)= "addStudent()">AddStudent</button>

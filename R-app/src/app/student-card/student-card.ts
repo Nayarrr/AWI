@@ -15,4 +15,5 @@ import { Student } from '../student/student';
 
 export class StudentCard {
   student = input<Student>()
+  remove = output<number | null>()
 }
