@@ -1,0 +1,30 @@
+<!-- <button (click)="remove">Supprimer</button> -->
+
+
+@if(student()){
+    @let st = student()!;
+
+    <mat-card class="student-card">
+      <mat-card-header>
+        <mat-card-title>{{st.firstname }} {{st.name | uppercase}}</mat-card-title>
+        <mat-card-subtitle>Inscrit depuis {{st.date | date:'longDate'}}</mat-card-subtitle>
+        <div style="margin-left:auto">
+          <button mat-icon-button aria-label="Supprimer">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>           
+        <p>Promo : {{st.filiere }} {{st.promo}}</p>
+
+        @if(st.date.getFullYear() < 2023 ){
+          <button mat-stroked-button color="warn" disabled>Alumni</button>
+        }@else if(st.date.getFullYear() === 2023 || st.date.getFullYear() === 2024){
+          <button mat-stroked-button color="primary" disabled>Etudiant</button>
+        }@else{
+          <button mat-stroked-button color="accent" disabled>Nouvel inscrit</button>
+        }
+      </mat-card-content>
+    </mat-card>
+}
