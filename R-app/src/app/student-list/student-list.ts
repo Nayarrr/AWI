@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, WritableSignal, signal} from '@angular/core';
 import { StudentCard } from '../student-card/student-card';
 import {Student} from '../student/student'
 import { Formulaire } from '../formulaire/formulaire';
@@ -11,23 +11,27 @@ import { Formulaire } from '../formulaire/formulaire';
 })
 export class StudentList {
 
-  students : Student[] = [new Student(1,"Rayan", "Tournay","DaMS",4, new Date(2022,11,1)), 
-                          new Student(2,"Nayarr", "Luffy","DaMS",3, new Date()),
-                          new Student(3,"kaka", "koko","DaMS",5, new Date())
-                        ]
+  students: WritableSignal<Student[]> = signal([
+    new Student(1,"Rayan", "Tournay","DaMS",4, new Date(2022,11,1)),
+    new Student(2,"Nayarr", "Luffy","DaMS",3, new Date()),
+    new Student(3,"kaka", "koko","DaMS",5, new Date())
+  ]);
 
-  showForm : boolean = false;
+  showForm = signal(false);
+
+  studentCount = computed(() => this.students().length);
+
 
   toggleForm(): void {
-    this.showForm = !this.showForm;
+    this.showForm.update(show => !show);
   }
 
   addStudent(student: Student){
-    this.students = [...this.students, student];
-    this.showForm = false;
+    this.students.update(list => [...list, student]);
+    this.showForm.set(false);
   }
   
   onDelete(id : number | null ){
-    this.students= this.students.filter(s => s.id !== id)
+    this.students.update(list => list.filter(s => s.id !== id));
   }
 }
