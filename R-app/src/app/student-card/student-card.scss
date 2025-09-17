@@ -1,0 +1,37 @@
+.student-card{
+  width: 100%;
+  max-width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 5px 6px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.student-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+.student-card .mat-card-header, .student-card .mat-card-content{
+  padding: 12px 16px;
+}
+
+.student-card button[mat-icon-button]{
+  min-width: 36px;
+  height: 36px;
+  line-height: 36px;
+  padding: 0;
+}
+
+.student-card.alumni{
+  background: #ffe89d;
+  border-left: 4px solid #ffb300;
+}
+.student-card.etudiant{
+  background: #e3f2fd; 
+  border-left: 4px solid #1e88e5;
+}
+.student-card.nouvelinscrit{
+  background: #e8f5e9; 
+  border-left: 4px solid #43a047;
+}

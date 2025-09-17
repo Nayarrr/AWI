@@ -11,15 +11,22 @@ import { Formulaire } from '../formulaire/formulaire';
 })
 export class StudentList {
 
-  students : Student[] = [new Student(1,"Rayan", "Tournay","DaMS",4, new Date(2022,9,9)), 
+  students : Student[] = [new Student(1,"Rayan", "Tournay","DaMS",4, new Date(2022,11,1)), 
                           new Student(2,"Nayarr", "Luffy","DaMS",3, new Date()),
                           new Student(3,"kaka", "koko","DaMS",5, new Date())
                         ]
 
-  addStudent(){
+  showForm : boolean = false;
 
+  toggleForm(): void {
+    this.showForm = !this.showForm;
   }
 
+  addStudent(student: Student){
+    this.students = [...this.students, student];
+    this.showForm = false;
+  }
+  
   onDelete(id : number | null ){
     this.students= this.students.filter(s => s.id !== id)
   }

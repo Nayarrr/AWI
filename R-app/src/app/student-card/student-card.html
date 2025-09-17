@@ -4,7 +4,10 @@
 @if(student()){
     @let st = student()!;
 
-    <mat-card class="student-card">
+    <mat-card class="student-card"
+              [class.alumni]="st.date.getFullYear() < 2023"
+              [class.etudiant]="st.date.getFullYear() === 2023 || st.date.getFullYear() === 2024"
+              [class.nouvelinscrit]="st.date.getFullYear() > 2024">
       <mat-card-header>
         <mat-card-title>{{st.firstname }} {{st.name | uppercase}}</mat-card-title>
         <mat-card-subtitle>Inscrit depuis {{st.date | date:'longDate'}}</mat-card-subtitle>

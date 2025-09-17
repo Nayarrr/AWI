@@ -9,10 +9,6 @@ export class Student{
         public date : Date,
     ){}
 
-    get fullname(): string{
-        return '${this.firstname} ${this.name}'
-    }
-
     get isFinalYear():boolean{
         return this.promo === 5
     }

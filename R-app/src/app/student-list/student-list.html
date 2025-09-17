@@ -1,5 +1,11 @@
+<div class="cards">
 @for (student of students; track student.id){
     <app-student-card [student] = "student" (remove) = "onDelete($event)"></app-student-card>
 }
+</div>
 
-<button (click)= "addStudent()">AddStudent</button>
+@if (showForm) {
+  <app-formulaire (newStudent)="addStudent($event)"></app-formulaire>
+}
+
+<button (click)="toggleForm()">{{ showForm ? 'Cancel' : 'AddStudent' }}</button>
