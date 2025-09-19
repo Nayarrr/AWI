@@ -13,4 +13,7 @@ export class Student{
         return this.promo === 5
     }
 
+    get fullName(): string{
+        return `${this.firstname} ${this.name}`;
+    }
 }

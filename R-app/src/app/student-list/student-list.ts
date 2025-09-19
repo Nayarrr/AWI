@@ -1,4 +1,4 @@
-import { Component, computed, WritableSignal, signal} from '@angular/core';
+import { Component, computed, WritableSignal, signal, effect} from '@angular/core';
 import { StudentCard } from '../student-card/student-card';
 import {Student} from '../student/student'
 import { Formulaire } from '../formulaire/formulaire';
@@ -11,6 +11,12 @@ import { Formulaire } from '../formulaire/formulaire';
 })
 export class StudentList {
 
+  constructor(){
+    effect(() => {console.log('Utilisateur courant : ', this.username())});
+    effect(() => {console.log ('nombre de student : ', this.students().length)});
+    effect(() => {console.log ('derniere suppression : ', this.lastDelete()?.firstname)});
+  }
+
   students: WritableSignal<Student[]> = signal([
     new Student(1,"Rayan", "Tournay","DaMS",4, new Date(2022,11,1)),
     new Student(2,"Nayarr", "Luffy","DaMS",3, new Date()),
@@ -20,6 +26,8 @@ export class StudentList {
   showForm = signal(false);
 
   studentCount = computed(() => this.students().length);
+
+  lastDelete : WritableSignal<Student|null> = signal(null);
 
 
   toggleForm(): void {
@@ -31,7 +39,15 @@ export class StudentList {
     this.showForm.set(false);
   }
   
-  onDelete(id : number | null ){
-    this.students.update(list => list.filter(s => s.id !== id));
+  onDelete(student : Student){
+    this.lastDelete.set(student);
+    this.students.update(list => list.filter(s => s.id !== student.id));
   }
+
+  username = signal('Alice')
+
+  changeUsername() : void{
+    this.username.update(value => 'Bob');
+  }
+
 }

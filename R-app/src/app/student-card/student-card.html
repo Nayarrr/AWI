@@ -1,6 +1,3 @@
-<!-- <button (click)="remove">Supprimer</button> -->
-
-
 @if(student()){
     @let st = student()!;
 
@@ -12,7 +9,7 @@
         <mat-card-title>{{st.firstname }} {{st.name | uppercase}}</mat-card-title>
         <mat-card-subtitle>Inscrit depuis {{st.date | date:'longDate'}}</mat-card-subtitle>
         <div style="margin-left:auto">
-          <button (click) = "remove.emit(st.id)"><mat-icon>delete</mat-icon></button>
+          <button (click) = "remove.emit(st)"><mat-icon>delete</mat-icon></button>
         </div>
       </mat-card-header>
 
