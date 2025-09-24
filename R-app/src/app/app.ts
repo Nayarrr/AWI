@@ -6,12 +6,13 @@ import { CurrencyPipe, DatePipe} from '@angular/common';
 import { StudentList } from './student-list/student-list';
 import { Counter } from './counter/counter';
 import { Formulaire } from './formulaire/formulaire';
-
+import { StudentDetail } from './student-detail/student-detail';
+import { LogViewer } from './log-viewer/log-viewer';
 
 @Component({
   selector: 'app-root',
   standalone : true,
-  imports: [RouterOutlet, HelloStudent, StudentCard, CurrencyPipe, DatePipe, StudentList, Counter,Formulaire],
+  imports: [StudentList, Counter, StudentDetail, LogViewer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

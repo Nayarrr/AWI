@@ -8,7 +8,7 @@ import { StudentDto } from '../student-dto';
 @Component({
   selector: 'app-student-card',
   standalone : true,
-  imports: [DatePipe, CurrencyPipe, UpperCasePipe, MatCardModule, MatButtonModule, MatIconModule],
+  imports: [DatePipe, UpperCasePipe, MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './student-card.html',
   styleUrl: './student-card.scss'
 })

@@ -9,9 +9,9 @@ export class StudentListService {
     {id : 1, firstname : 'Rayan', name :  'Tournay', filiere:'DaMS',promo : 4, date : new Date(2022,11,1)},
     {id : 2, firstname : 'Nayarr', name :  'Luffy', filiere:'DaMS',promo : 4, date : new Date()},
     {id : 1, firstname : 'kiki', name :  'kaka', filiere:'DaMS',promo : 3, date : new Date(2025,9,2)},
-  ])
+  ]) 
 
-  nextID = 4;
+  nextID = this._students().length + 1;
 
   readonly students = this._students.asReadonly()
 

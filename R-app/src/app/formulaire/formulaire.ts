@@ -11,7 +11,7 @@ import { StudentDto } from '../student-dto';
 })
 
 export class Formulaire {
-  EmitStudent = output<Omit<StudentDto, 'id'>>();
+  newStudent = output<Omit<StudentDto, 'id'>>();
 
   onSubmit(event : Event) : void{
     event.preventDefault(); //Empêche le rechargement de la page
@@ -27,6 +27,6 @@ export class Formulaire {
       date: new Date((formData.get('date') as string))
     };
 
-    this.EmitStudent.emit(newStudent);
+    this.newStudent.emit(newStudent);
   }
 }

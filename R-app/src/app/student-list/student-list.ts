@@ -3,6 +3,7 @@ import { StudentCard } from '../student-card/student-card';
 import { Formulaire } from '../formulaire/formulaire';
 import { StudentListService } from '../service/studentlist/student-list-service';
 import { StudentDto } from '../student-dto';
+import { LoggingService } from '../service/logging/logging-service';
 
 @Component({
   selector: 'app-student-list',
@@ -12,19 +13,15 @@ import { StudentDto } from '../student-dto';
 })
 export class StudentList {
 
-  constructor(){
-    effect(() => {console.log('Utilisateur courant : ', this.username())});
-    effect(() => {console.log ('nombre de student : ', this.students().length)});
-    effect(() => {console.log ('derniere suppression : ', this.lastDelete()?.firstname)});
-  }
-
   svs = inject(StudentListService);
+
+  ls = inject(LoggingService);
 
   students = this.svs.students;
 
   showForm = signal(false);
 
-  studentCount = computed(() => this.students.length);
+  studentCount = computed(() => this.students().length);
 
   lastDelete : WritableSignal<StudentDto|null> = signal(null);
 
@@ -35,16 +32,13 @@ export class StudentList {
 
   addStudent(student: Omit<StudentDto, 'id'>){
     this.svs.add(student);
+    this.ls.log(`Student added: ${student.firstname} ${student.name}`, 'StudentList');
+    this.showForm.set(false);
+    
   }
   
   onDelete(id : number){
     this.svs.remove(id);
+    this.ls.log(`Student removed id: ${id}`, 'StudentList');
   }
-
-  username = signal('Alice')
-
-  changeUsername() : void{
-    this.username.update(value => 'Bob');
-  }
-
 }

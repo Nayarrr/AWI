@@ -1,0 +1,11 @@
+@if(logs().length > 0){
+  <div class="log-viewer">
+    <h3>Logs</h3>
+    <button (click)="reset()">ResetLogs</button>
+    <ul>
+      @for (entry of logs(); track entry.id){
+        <li>{{entry.ts | date:'short'}} - [{{entry.scope}}] {{entry.message}}</li>
+      }
+    </ul>
+  </div>
+}
