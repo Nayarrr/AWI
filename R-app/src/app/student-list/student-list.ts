@@ -1,7 +1,8 @@
-import { Component, computed, WritableSignal, signal, effect} from '@angular/core';
+import { Component, computed, WritableSignal, signal, effect, inject} from '@angular/core';
 import { StudentCard } from '../student-card/student-card';
-import {Student} from '../student/student'
 import { Formulaire } from '../formulaire/formulaire';
+import { StudentListService } from '../service/studentlist/student-list-service';
+import { StudentDto } from '../student-dto';
 
 @Component({
   selector: 'app-student-list',
@@ -17,31 +18,27 @@ export class StudentList {
     effect(() => {console.log ('derniere suppression : ', this.lastDelete()?.firstname)});
   }
 
-  students: WritableSignal<Student[]> = signal([
-    new Student(1,"Rayan", "Tournay","DaMS",4, new Date(2022,11,1)),
-    new Student(2,"Nayarr", "Luffy","DaMS",3, new Date()),
-    new Student(3,"kaka", "koko","DaMS",5, new Date())
-  ]);
+  svs = inject(StudentListService);
+
+  students = this.svs.students;
 
   showForm = signal(false);
 
-  studentCount = computed(() => this.students().length);
+  studentCount = computed(() => this.students.length);
 
-  lastDelete : WritableSignal<Student|null> = signal(null);
+  lastDelete : WritableSignal<StudentDto|null> = signal(null);
 
 
   toggleForm(): void {
     this.showForm.update(show => !show);
   }
 
-  addStudent(student: Student){
-    this.students.update(list => [...list, student]);
-    this.showForm.set(false);
+  addStudent(student: Omit<StudentDto, 'id'>){
+    this.svs.add(student);
   }
   
-  onDelete(student : Student){
-    this.lastDelete.set(student);
-    this.students.update(list => list.filter(s => s.id !== student.id));
+  onDelete(id : number){
+    this.svs.remove(id);
   }
 
   username = signal('Alice')

@@ -1,20 +1,22 @@
 import { Injectable, signal } from '@angular/core';
-import {Student} from '../student/Student';
+import { StudentDto } from '../../student-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentListService {
-  private readonly _students = signal<Student[]>([
+  private readonly _students = signal<StudentDto[]>([ //Private afin d'eviter de faire s= [] et readonly afin d'eviter que les fonctions mutable puissent modifier (par ex : s.set([]))
     {id : 1, firstname : 'Rayan', name :  'Tournay', filiere:'DaMS',promo : 4, date : new Date(2022,11,1)},
     {id : 2, firstname : 'Nayarr', name :  'Luffy', filiere:'DaMS',promo : 4, date : new Date()},
     {id : 1, firstname : 'kiki', name :  'kaka', filiere:'DaMS',promo : 3, date : new Date(2025,9,2)},
   ])
 
+  nextID = 4;
+
   readonly students = this._students.asReadonly()
 
-  add(student : Student) : void {
-    this._students.update(list => [...list, student])
+  add(student : Omit<StudentDto, 'id'>) : void {
+    this._students.update(list => [...list, {...student, id : this.nextID}])
   }
 
   remove(id : number): void {
@@ -25,7 +27,8 @@ export class StudentListService {
     this._students.set([])
   }
 
-  findByID(id : number): Student | undefined{
+  findByID(id : number): StudentDto | undefined{
     return this._students().find(s => s.id===id)
   }
+
 }

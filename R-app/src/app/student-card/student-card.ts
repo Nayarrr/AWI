@@ -3,7 +3,7 @@ import { CurrencyPipe, DatePipe, UpperCasePipe} from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Student } from '../student/student';
+import { StudentDto } from '../student-dto';
 
 @Component({
   selector: 'app-student-card',
@@ -14,6 +14,6 @@ import { Student } from '../student/student';
 })
 
 export class StudentCard {
-  student = input<Student>()
-  remove = output<Student>()
+  student = input<StudentDto>()
+  remove = output<number>()
 }

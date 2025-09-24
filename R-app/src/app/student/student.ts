@@ -1,19 +1,11 @@
-export class Student{
+import { Component } from '@angular/core';
 
-    constructor(
-        public id : number,
-        public firstname : string,
-        public name : string,
-        public filiere : string,
-        public promo : number,
-        public date : Date,
-    ){}
+@Component({
+  selector: 'app-student',
+  imports: [],
+  templateUrl: './student.html',
+  styleUrl: './student.scss'
+})
+export class Student {
 
-    get isFinalYear():boolean{
-        return this.promo === 5
-    }
-
-    get fullName(): string{
-        return `${this.firstname} ${this.name}`;
-    }
 }

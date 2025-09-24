@@ -1,5 +1,5 @@
 import { Component, output } from '@angular/core';
-import { Student } from '../student/student';
+import { StudentDto } from '../student-dto';  
 
 
 @Component({
@@ -11,10 +11,7 @@ import { Student } from '../student/student';
 })
 
 export class Formulaire {
-  newStudent = output<Student>();
-  private generateId(): number {
-    return Math.floor(Math.random() * 10000);
-  }
+  EmitStudent = output<Omit<StudentDto, 'id'>>();
 
   onSubmit(event : Event) : void{
     event.preventDefault(); //Empêche le rechargement de la page
@@ -22,14 +19,14 @@ export class Formulaire {
     const form = event.target as HTMLFormElement
     const formData = new FormData(form)
 
-    const student =  new Student(
-      this.generateId(),
-      formData.get('firstname') as string,
-      formData.get('name') as string,
-      formData.get('filiere') as string,
-      Number(formData.get('promo')),
-      new Date(formData.get('date') as string));
+    const newStudent: Omit<StudentDto, 'id'> = {
+      firstname: (formData.get('firstname') as string),
+      name: (formData.get('name') as string),
+      filiere: (formData.get('filiere') as string),
+      promo: Number(formData.get('promo')),
+      date: new Date((formData.get('date') as string))
+    };
 
-    this.newStudent.emit(student);
+    this.EmitStudent.emit(newStudent);
   }
 }
