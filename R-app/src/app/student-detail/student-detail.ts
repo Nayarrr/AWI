@@ -1,7 +1,7 @@
 import { Component, input, ChangeDetectionStrategy, inject } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { StudentListService } from '../service/studentlist/student-list-service';
-import { StudentDto } from '../student-dto';
+import { StudentDto } from '../types/student-dto';
 
 @Component({
   selector: 'app-student-detail',

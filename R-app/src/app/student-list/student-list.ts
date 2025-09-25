@@ -2,7 +2,7 @@ import { Component, computed, WritableSignal, signal, effect, inject} from '@ang
 import { StudentCard } from '../student-card/student-card';
 import { Formulaire } from '../formulaire/formulaire';
 import { StudentListService } from '../service/studentlist/student-list-service';
-import { StudentDto } from '../student-dto';
+import { StudentDto } from '../types/student-dto';
 import { LoggingService } from '../service/logging/logging-service';
 
 @Component({

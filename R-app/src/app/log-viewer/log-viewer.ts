@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { LogEntry } from '../log-entry';
 import { LoggingService } from '../service/logging/logging-service';
 
 @Component({

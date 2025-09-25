@@ -1,5 +1,5 @@
 import { Component, output } from '@angular/core';
-import { StudentDto } from '../student-dto';  
+import { StudentDto } from '../types/student-dto';  
 
 
 @Component({

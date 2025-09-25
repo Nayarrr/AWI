@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { LogEntry } from '../../log-entry';
+import { LogEntry } from '../../types/log-entry';
 
 @Injectable({
   providedIn: 'root'

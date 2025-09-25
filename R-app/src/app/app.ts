@@ -1,11 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HelloStudent } from './hello-student/hello-student';
-import { StudentCard } from './student-card/student-card';
-import { CurrencyPipe, DatePipe} from '@angular/common';
 import { StudentList } from './student-list/student-list';
 import { Counter } from './counter/counter';
-import { Formulaire } from './formulaire/formulaire';
 import { StudentDetail } from './student-detail/student-detail';
 import { LogViewer } from './log-viewer/log-viewer';
 

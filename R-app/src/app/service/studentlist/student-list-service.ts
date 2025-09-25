@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { StudentDto } from '../../student-dto';
+import { StudentDto } from '../../types/student-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ export class StudentListService {
   private readonly _students = signal<StudentDto[]>([ //Private afin d'eviter de faire s= [] et readonly afin d'eviter que les fonctions mutable puissent modifier (par ex : s.set([]))
     {id : 1, firstname : 'Rayan', name :  'Tournay', filiere:'DaMS',promo : 4, date : new Date(2022,11,1)},
     {id : 2, firstname : 'Nayarr', name :  'Luffy', filiere:'DaMS',promo : 4, date : new Date()},
-    {id : 1, firstname : 'kiki', name :  'kaka', filiere:'DaMS',promo : 3, date : new Date(2025,9,2)},
+    {id : 3, firstname : 'kiki', name :  'kaka', filiere:'DaMS',promo : 3, date : new Date(2025,9,2)},
   ]) 
 
   nextID = this._students().length + 1;
