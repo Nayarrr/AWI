@@ -41,4 +41,9 @@ export class StudentList {
     this.svs.remove(id);
     this.ls.log(`Student removed id: ${id}`, 'StudentList');
   }
+
+  deleteAll(){
+    this.svs.removeAll();
+    this.ls.log('Et la sentance est irrévocable !', 'StudentList');
+  }
 }
