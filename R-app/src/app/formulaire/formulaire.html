@@ -1,18 +1,13 @@
-<form (submit)="onSubmit($event)">
-  <label for="name">Name:
-  <input type="text" id="name" name="name" required/> </label>
+<form [formGroup] = "form" (submit)="onSubmit($event)">
+  <input type="text" formControlName="name" placeholder="Nom"/> 
   
-  <label for="firstname">First Name:
-  <input type="text" id="firstname" name="firstname" required/></label>
+  <input type="text" formControlName="firstname" placeholder="Prénom"/>
 
-  <label for = "filiere ">Filiere:</label>
-  <input type = "text" id = "filiere" name = "filiere" required>
+  <input type = "text" formControlName="filiere" placeholder="Filiere">
   
-  <label for="promo">Promo:</label>
-  <input type="number" id="promo" name="promo" required min="1" max="5">
-  
-  <label for="date">Date d'inscription:</label>
-  <input type="date" id="date"  name="date" required>
+  <input type="number" formControlName="promo" placeholder="Promo">
+
+  <input type="date" formControlName="date" placeholder="Date">
   
   <button type="submit">Submit</button>
 </form>
