@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { StudentDto } from '../../types/student-dto';
+import { find } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,11 @@ export class StudentListService {
 
   findByID(id : number): StudentDto | undefined{
     return this._students().find(s => s.id===id)
+  }
+
+  update(id : number){
+    const studentUpdate = this.findByID(id);
+    
   }
 
 }

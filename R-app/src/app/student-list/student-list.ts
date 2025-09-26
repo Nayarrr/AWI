@@ -23,9 +23,6 @@ export class StudentList {
 
   studentCount = computed(() => this.students().length);
 
-  lastDelete : WritableSignal<StudentDto|null> = signal(null);
-
-
   toggleForm(): void {
     this.showForm.update(show => !show);
   }
@@ -39,11 +36,17 @@ export class StudentList {
   
   onDelete(id : number){
     this.svs.remove(id);
-    this.ls.log(`Student removed id: ${id}`, 'StudentList');
+    this.ls.log(`Id du student supprimé : ${id}`, 'StudentList');
   }
 
   deleteAll(){
     this.svs.removeAll();
     this.ls.log('Et la sentance est irrévocable !', 'StudentList');
+  }
+
+  updateStudent(id : number){
+    this.svs.update(id);
+    this.ls.log(`ID du student modifié : ${id}`, 'StudentList');
+
   }
 }
