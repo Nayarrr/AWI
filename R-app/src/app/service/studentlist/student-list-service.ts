@@ -32,9 +32,16 @@ export class StudentListService {
     return this._students().find(s => s.id===id)
   }
 
-  update(id : number){
-    const studentUpdate = this.findByID(id);
-    
+  // Accept a full StudentDto and replace the existing entry immutably
+  update(updated: StudentDto){
+    const id = updated.id;
+    this._students.update(list => {
+      const idx = list.findIndex(s => s.id === id);
+      if (idx === -1) return list;
+      const copy = [...list];
+      copy[idx] = { ...updated };
+      return copy;
+    });
   }
 
 }

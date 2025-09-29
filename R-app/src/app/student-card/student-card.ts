@@ -16,4 +16,5 @@ import { StudentDto } from '../types/student-dto';
 export class StudentCard {
   student = input<StudentDto>()
   remove = output<number>()
+  edit = output<number>()
 }

@@ -1,4 +1,4 @@
-import { Component, computed, WritableSignal, signal, effect, inject} from '@angular/core';
+import { Component, computed, WritableSignal, signal, effect, inject } from '@angular/core';
 import { StudentCard } from '../student-card/student-card';
 import { Formulaire } from '../formulaire/formulaire';
 import { StudentListService } from '../service/studentlist/student-list-service';
@@ -21,19 +21,37 @@ export class StudentList {
 
   showForm = signal(false);
 
+  editing = signal<StudentDto | null>(null);
+
   studentCount = computed(() => this.students().length);
 
   toggleForm(): void {
     this.showForm.update(show => !show);
   }
 
+  startEdit(id: number): void {
+    const s = this.svs.findByID(id);
+    this.editing.set(s ? { ...s } : null);
+    this.showForm.set(true);
+  }
+
   addStudent(student: Omit<StudentDto, 'id'>){
     this.svs.add(student);
     this.ls.log(`Student added: ${student.firstname} ${student.name}`, 'StudentList');
     this.showForm.set(false);
-    
   }
-  
+
+  applyUpdatedStudent(updated: StudentDto){
+    if (updated.id == null) {
+      this.ls.log('Cannot update student without an id', 'StudentList');
+      return;
+    }
+    this.svs.update(updated);
+    this.ls.log(`Student updated: ${updated.firstname} ${updated.name}`, 'StudentList');
+    this.editing.set(null);
+    this.showForm.set(false);
+  }
+
   onDelete(id : number){
     this.svs.remove(id);
     this.ls.log(`Id du student supprimé : ${id}`, 'StudentList');
@@ -42,11 +60,5 @@ export class StudentList {
   deleteAll(){
     this.svs.removeAll();
     this.ls.log('Et la sentance est irrévocable !', 'StudentList');
-  }
-
-  updateStudent(id : number){
-    this.svs.update(id);
-    this.ls.log(`ID du student modifié : ${id}`, 'StudentList');
-
   }
 }

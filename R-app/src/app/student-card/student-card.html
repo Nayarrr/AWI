@@ -7,14 +7,9 @@
       <mat-card-header>
         <mat-card-title>{{st.firstname }} {{st.name | uppercase}}</mat-card-title>
         <mat-card-subtitle>Inscrit depuis {{st.date | date:'longDate'}}</mat-card-subtitle>
-        <div style="margin-left:auto">
-          @if(st.id !== null){
-            <button (click) = "remove.emit(st.id)"><mat-icon>delete</mat-icon></button>
-          }
-          @else {
-            <button disabled><mat-icon>delete</mat-icon></button>
-          }
-
+        <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+          <button mat-icon-button (click)="edit.emit(st.id!)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="remove.emit(st.id!)"><mat-icon>delete</mat-icon></button>
         </div>
       </mat-card-header>
 
