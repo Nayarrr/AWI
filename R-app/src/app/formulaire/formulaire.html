@@ -1,11 +1,22 @@
 <form [formGroup] = "form" (ngSubmit)="onSubmit($event)">
-  <input type="text" formControlName="name" placeholder="Nom"/> 
+  <input type="text" formControlName="name" placeholder="Nom"/>
+  @if (form.controls.name.errors?.['required']){
+    <small> Nom Obligatoire !</small>
+  }
   
   <input type="text" formControlName="firstname" placeholder="Prénom"/>
 
   <input type = "text" formControlName="filiere" placeholder="Filiere">
   
   <input type="number" formControlName="promo" placeholder="Promo">
+  @if(form.controls.name.errors?.['maxLenght']){
+    <small> caca sur toi</small>
+  }
+
+  <input type ="date" formControlName="date" placeholder="Date d'inscription">
   
-  <button type="submit">Submit</button>
+
+  <button [disabled] = "form.invalid" type="submit">Submit</button>
+<!--Disabled si le form n'est pas valide donc ne respecte pas les Validateurs -->
+
 </form>

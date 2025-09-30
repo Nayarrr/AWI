@@ -1,6 +1,6 @@
 import { Component, input, output, effect } from '@angular/core';
 import { StudentDto } from '../types/student-dto';  
-import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms'
+import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
  
 
 @Component({
@@ -13,21 +13,23 @@ import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms'
 
 export class Formulaire {
   readonly form = new FormGroup({
-    firstname : new FormControl<string >('', {nonNullable : true}),
-    name : new FormControl<string>('', {nonNullable : true}),
-    filiere : new FormControl<string>('', {nonNullable : true}),
-    promo : new FormControl<number>(0, {nonNullable : true}),
-    date : new FormControl<string>('', {nonNullable : true}),
+    firstname : new FormControl<string >('', {nonNullable : true, 
+      validators : [Validators.required, Validators.minLength(2)]}),
+    name : new FormControl<string>('', {nonNullable : true,
+      validators : [Validators.required, Validators.minLength(2)]}, ),
+    filiere : new FormControl<string>('', {nonNullable : true,
+      validators : [Validators.required, Validators.minLength(2)]}),
+    promo : new FormControl<number>(0, {nonNullable : true, 
+      validators : [Validators.required, Validators.maxLength(2)]}),
+    date : new FormControl<string>('', {nonNullable : true,}),
   })
 
-  // editing inputs/outputs
   student = input<StudentDto | null>();
   newStudent = output<Omit<StudentDto, 'id'>>()
   editStudent = output<StudentDto>()
   cancel = output<void>()
 
   constructor(){
-    // préremplir le formulaire quand l'input `student` change
     effect(() => {
       const s = this.student();
       if (s) {
@@ -57,10 +59,8 @@ export class Formulaire {
 
     const current = this.student();
     if (current) {
-      // mode édition : émettre l'objet complet
       this.editStudent.emit({ ...current, ...payload });
     } else {
-      // création
       this.newStudent.emit(payload);
     }
   }

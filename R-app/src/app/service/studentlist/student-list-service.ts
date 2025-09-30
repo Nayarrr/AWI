@@ -6,7 +6,7 @@ import { find } from 'rxjs';
   providedIn: 'root'
 })
 export class StudentListService {
-  private readonly _students = signal<StudentDto[]>([ //Private afin d'eviter de faire s= [] et readonly afin d'eviter que les fonctions mutable puissent modifier (par ex : s.set([]))
+  private readonly _students = signal<StudentDto[]>([ //Private afin d'eviter de faire s = [] et readonly afin d'eviter que les fonctions mutable puissent modifier (par ex : s.set([]))
     {id : 1, firstname : 'Rayan', name :  'Tournay', filiere:'DaMS',promo : 4, date : new Date(2022,11,1)},
     {id : 2, firstname : 'Nayarr', name :  'Luffy', filiere:'DaMS',promo : 4, date : new Date()},
     {id : 3, firstname : 'kiki', name :  'kaka', filiere:'DaMS',promo : 3, date : new Date(2025,9,2)},
@@ -32,15 +32,16 @@ export class StudentListService {
     return this._students().find(s => s.id===id)
   }
 
-  // Accept a full StudentDto and replace the existing entry immutably
   update(updated: StudentDto){
     const id = updated.id;
     this._students.update(list => {
-      const idx = list.findIndex(s => s.id === id);
-      if (idx === -1) return list;
-      const copy = [...list];
-      copy[idx] = { ...updated };
-      return copy;
+      const index = list.findIndex(s => s.id === id);
+      if (index === -1) {
+        return list; // Student not found, return the original list
+      }
+      const newList = [...list];
+      newList[index] = updated;
+      return newList;
     });
   }
 
