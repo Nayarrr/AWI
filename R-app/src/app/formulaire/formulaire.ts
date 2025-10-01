@@ -1,7 +1,7 @@
 import { Component, input, output, effect } from '@angular/core';
 import { StudentDto } from '../types/student-dto';  
 import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
- 
+import { UsernameValidator } from '../validators/username-validator';
 
 @Component({
   selector: 'app-formulaire',
@@ -14,9 +14,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular
 export class Formulaire {
   readonly form = new FormGroup({
     firstname : new FormControl<string >('', {nonNullable : true, 
-      validators : [Validators.required, Validators.minLength(2)]}),
+      validators : [Validators.required, Validators.minLength(2), UsernameValidator.cannotContainSpace]}),
     name : new FormControl<string>('', {nonNullable : true,
-      validators : [Validators.required, Validators.minLength(2)]}, ),
+      validators : [Validators.required, Validators.minLength(2), UsernameValidator.cannotContainSpace]}, ),
     filiere : new FormControl<string>('', {nonNullable : true,
       validators : [Validators.required, Validators.minLength(2)]}),
     promo : new FormControl<number>(0, {nonNullable : true, 

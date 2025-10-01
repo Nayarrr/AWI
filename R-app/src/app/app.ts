@@ -1,15 +1,14 @@
 import { Component, signal } from '@angular/core';
-import { StudentList } from './student-list/student-list';
-import { Counter } from './counter/counter';
-import { LogViewer } from './log-viewer/log-viewer';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone : true,
-  imports: [StudentList, Counter, LogViewer],
+  imports: [RouterLink, RouterOutlet, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
+
 export class App {
   protected readonly title = signal('R-app');
 }

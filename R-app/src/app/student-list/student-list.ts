@@ -4,10 +4,12 @@ import { Formulaire } from '../formulaire/formulaire';
 import { StudentListService } from '../service/studentlist/student-list-service';
 import { StudentDto } from '../types/student-dto';
 import { LoggingService } from '../service/logging/logging-service';
+import { RouterOutlet } from '@angular/router';
+import { LogViewer } from '../log-viewer/log-viewer';
 
 @Component({
   selector: 'app-student-list',
-  imports: [StudentCard, Formulaire],
+  imports: [StudentCard, Formulaire, RouterOutlet, LogViewer],
   templateUrl: './student-list.html',
   styleUrl: './student-list.scss'
 })
