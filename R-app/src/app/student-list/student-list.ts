@@ -4,12 +4,11 @@ import { Formulaire } from '../formulaire/formulaire';
 import { StudentListService } from '../service/studentlist/student-list-service';
 import { StudentDto } from '../types/student-dto';
 import { LoggingService } from '../service/logging/logging-service';
-import { RouterOutlet } from '@angular/router';
 import { LogViewer } from '../log-viewer/log-viewer';
 
 @Component({
   selector: 'app-student-list',
-  imports: [StudentCard, Formulaire, RouterOutlet, LogViewer],
+  imports: [StudentCard, Formulaire, LogViewer],
   templateUrl: './student-list.html',
   styleUrl: './student-list.scss'
 })
@@ -45,11 +44,11 @@ export class StudentList {
 
   applyUpdatedStudent(updated: StudentDto){
     if (updated.id == null) {
-      this.ls.log('Cannot update student without an id', 'StudentList');
+      this.ls.log('Il a pas de id', 'StudentList');
       return;
     }
     this.svs.update(updated);
-    this.ls.log(`Student updated: ${updated.firstname} ${updated.name}`, 'StudentList');
+    this.ls.log(`Student mis a jour: ${updated.firstname} ${updated.name}`, 'StudentList');
     this.editing.set(null);
     this.showForm.set(false);
   }
