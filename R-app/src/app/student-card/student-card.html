@@ -1,15 +1,17 @@
-@if(student()){
-    @let st = student()!;
-    <mat-card class="student-card"
+@if(studentAffiche()){
+    @let st = studentAffiche()!;
+    <mat-card class="student-card" [class.detail]="isDetail()"
               [class.alumni]="st.date.getFullYear() < 2023"
               [class.etudiant]="st.date.getFullYear() === 2023 || st.date.getFullYear() === 2024"
               [class.nouvelinscrit]="st.date.getFullYear() > 2024">
       <mat-card-header>
         <mat-card-title>{{st.firstname }} {{st.name | uppercase}}</mat-card-title>
         <mat-card-subtitle>Inscrit depuis {{st.date | date:'longDate'}}</mat-card-subtitle>
-        <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
-          <button mat-icon-button (click)="edit.emit(st.id!)"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button color="warn" (click)="remove.emit(st.id!)"><mat-icon>delete</mat-icon></button>
+        <div class="card-actions">
+          @if(!isDetail()){
+            <button mat-icon-button (click)="edit.emit(st.id!)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="remove.emit(st.id!)"><mat-icon>delete</mat-icon></button>
+          }
         </div>
       </mat-card-header>
 
@@ -25,10 +27,11 @@
         }
       </mat-card-content>
 
-      <!-- <mat-card-content>
-        <button mat-stroked-button (click)="showDetails()">Voir détail</button>
-      </mat-card-content> -->
-      
+      <mat-card-content>
+        @if(!isDetail()){
+          <button mat-stroked-button (click)="showDetails()">Voir détail</button>
+        }
+      </mat-card-content>
     </mat-card>
 }
 

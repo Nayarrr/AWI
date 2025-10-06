@@ -35,3 +35,37 @@
   background: #e8f5e9; 
   border-left: 4px solid #43a047;
 }
+
+.student-card.detail { 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(95vw, 720px);
+  max-width: 720px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  background: #ffffff;
+  z-index: 1200;
+}
+
+.student-card.detail .mat-card-title {
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+.student-card.detail .mat-card-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+.student-card.detail .mat-card-content {
+  padding: 20px 24px;
+  font-size: 1rem;
+}
+
+.card-actions{
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
