@@ -5,6 +5,7 @@ import { StudentListService } from '../service/studentlist/student-list-service'
 import { StudentDto } from '../types/student-dto';
 import { LoggingService } from '../service/logging/logging-service';
 import { LogViewer } from '../log-viewer/log-viewer';
+import { toSignal} from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'app-student-list',

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output} from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,6 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { StudentDto } from '../types/student-dto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentListService } from '../service/studentlist/student-list-service';
+import { LoggingService } from '../service/logging/logging-service';
+import { map, filter } from 'rxjs';
+import { toSignal} from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'app-student-card',
@@ -29,18 +32,18 @@ export class StudentCard {
     return this.student() ?? this.studentRoute();
   });
 
-  isDetail = computed(() => !this.student?.() && !!this.studentRoute()); //mode détail permet d'agrandir l'affichage et afficher au centre. En bref passer en mode détail sur la route 
+  isDetail = computed(() => this.student?.() && this.studentRoute()); //mode détail permet d'agrandir l'affichage et afficher au centre. En bref passer en mode détail sur la route 
 
-  constructor(){
-    this.route.paramMap.subscribe(pm => {
-      const raw = pm.get('id');
-      this.studentRoute.set(raw ? this.svs.findByID(Number(raw)) : undefined);
-    }
-  }
+  // constructor(){
+  //   effect(() => { this.})
+  // }
+
+  private id$ = this.route.paramMap.pipe( 
+    map(params => params.get('id')), 
+    filter((id) : id is string => id !== null),
+    map(id => Number(id))
+  )
+  public routeID = toSignal(this.id$, {initialValue : null})
   showDetails() {
-
-    if (id != null) {
-      this.router.navigate(['/Student', id]);
-    }
   }
 }
