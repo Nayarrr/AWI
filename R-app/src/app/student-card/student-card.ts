@@ -49,10 +49,6 @@ export class StudentCard {
 
   isDetail = computed(() => !this.student?.() && !!this.studentAffiche()); //mode détail permet d'agrandir l'affichage et afficher au centre. En bref passer en mode détail sur la route 
 
-  // constructor(){
-  //   effect(() => { this.})
-  // }
-
   private id$ = this.route.paramMap.pipe( 
     map(params => params.get('id')), 
     filter((id) : id is string => id !== null),

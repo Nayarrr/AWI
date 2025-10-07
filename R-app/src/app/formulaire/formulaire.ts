@@ -27,7 +27,7 @@ export class Formulaire {
   student = input<StudentDto | null>();
   newStudent = output<Omit<StudentDto, 'id'>>()
   editStudent = output<StudentDto>()
-  cancel = output<void>()
+  cancel = output<void>() 
 
   constructor(){
     effect(() => {

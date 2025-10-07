@@ -6,6 +6,7 @@ import { Counter } from './counter/counter';
 import { StudentCard } from './student-card/student-card';
 import { authGuard } from './guards/authGuard';
 import { ForbiddenComponent } from './forbidden-component/forbidden-component';
+import { PostListComponent } from './post-list-component/post-list-component';
 
 export const routes: Routes = [
     { path: '', component : HomeComponent, title : 'La Maison'}, 
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path : 'Counter', component : Counter, title : 'Ca compte !', canActivate : [authGuard]},
     { path : 'Student/:id', component : StudentCard, title : 'Détails'},
     { path : 'forbidden', component : ForbiddenComponent, title : 'Forbidden'},
+    { path : 'Posts', component : PostListComponent, title : 'Posts'},
 
     { path : '**', component : NotFoundComponent}
 ];

@@ -1,6 +1,6 @@
-export interface Post{
+export interface PostDTO{
     userId : number,
-    id : number,
+    id : number | undefined,
     title : string,
     body : string
 }
