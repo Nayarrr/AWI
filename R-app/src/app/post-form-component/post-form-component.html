@@ -1,1 +1,7 @@
-<p>post-form-component works!</p>
+<form [formGroup]= "form" (ngSubmit)="onSubmit($event)">
+    <input type = "number" formControlName="userId" placeholder = "userId"/>
+    <input type = "number" formControlName="id" placeholder = "id"/>
+    <input type = "text" formControlName="title" placeholder = "title"/>
+    <input type = "text" formControlName="body" placeholder = "body"/>
+    <button type="submit">Submit</button>
+</form>

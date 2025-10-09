@@ -7,11 +7,21 @@
 } -->
 
 <h2>Posts</h2>
+
+@if (showForm()){
+    <app-post-form-component 
+        (newP)="addPost($event)">
+    </app-post-form-component>
+}
+
+<button (click)="toggleForm()">{{ showForm() ? 'Cancel' : 'AddPost' }}</button>
+
 <ul>
-    @for (p of posts.value(); track p.id){
+    @if (posts(); as p){
+        @for (posts of p; track posts.id){
         <li>
-            <strong>{{p.title}}</strong>
-            <pre> {{p | json}}</pre>
+            <pre> {{posts | json}}</pre>
         </li>
+        }
     }
 </ul>
