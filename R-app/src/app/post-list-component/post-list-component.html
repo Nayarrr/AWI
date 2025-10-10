@@ -16,6 +16,8 @@
 
 <button (click)="toggleForm()">{{ showForm() ? 'Cancel' : 'AddPost' }}</button>
 
+<button (click)="testAPI()">Test</button>
+
 <ul>
     @if (posts(); as p){
         @for (posts of p; track posts.id){

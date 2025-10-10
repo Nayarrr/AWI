@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { HttpClient, httpResource } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { PostDTO } from '../types/post-dto';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
@@ -35,5 +35,9 @@ export class PostListComponent {
   addPost(post : PostDTO) : void{
     this.http.post<PostDTO>('https://jsonplaceholder.typicode.com/posts', post).subscribe(newPost => {this.pNews.update(arr => [...arr , newPost])})
     this.showForm.set(false)
+  }
+
+  testAPI() : void{
+    this.http.get('https://api/bad-url')
   }
 }
