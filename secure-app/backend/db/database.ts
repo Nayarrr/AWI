@@ -1,6 +1,6 @@
-// import pkg from 'pg'
-// const { Pool } = pkg
-import {Pool} from 'pg'
+import pkg from 'pg'
+const { Pool } = pkg
+
 // Récupération de la variable d'environnement Docker
 const pool = new Pool({
     connectionString:

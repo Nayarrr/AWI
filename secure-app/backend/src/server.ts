@@ -8,6 +8,9 @@ import publicRouter from './routes/public.ts'
 import 'dotenv/config'
 import { ensureAdmin } from '../db/initAdmin.ts'
 import usersRouter from './routes/users.ts'
+import authRouter from './routes/auth.ts'
+import { verifyToken } from './middleware/token-management.ts'
+import { requireAdmin } from './middleware/auth-admin.ts'
 
 await ensureAdmin()
 
@@ -33,7 +36,7 @@ next();
 app.use(morgan('dev')) // Log des requêtes : Visualiser le flux de requêtes entre Angular et Express
 app.use(express.json())
 app.use(cookieParser())
-app.use('/api/users', usersRouter)
+
 
 // Configuration CORS : autoriser le front Angular en HTTPS local
 app.use(cors({
@@ -45,6 +48,12 @@ app.use(cors({
 
 // Routes publiques
 app.use('/api/public', publicRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/users', verifyToken, usersRouter); // protégé
+app.use('/api/admin', verifyToken, requireAdmin, (req, res) => { 
+    res.json({ message: 'Bienvenue admin' });
+})
 
 // Chargement du certificat et clé générés par mkcert (étape 0)
 const key = fs.readFileSync('./certs/localhost-key.pem')
