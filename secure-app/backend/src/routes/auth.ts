@@ -73,7 +73,8 @@ router.post('/refresh', (req, res) => {
         const decoded = jwt.verify(refresh, JWT_SECRET) as userToken
         const newAccess = createAccessToken({ id: decoded.id, role: decoded.role })
         res.cookie('access_token', newAccess, {
-            httpOnly: true, secure: true, sameSite: 'strict', maxAge: 15 * 60 * 1000,})
+            httpOnly: true, secure: true, sameSite: 'strict', maxAge: 15 * 60 * 1000,
+        })
         res.json({ message: 'Token renouvelé' })
     } catch {
         res.status(403).json({ error: 'Refresh token invalide ou expiré' })
