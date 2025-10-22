@@ -1,0 +1,30 @@
+<form [formGroup] = "form" (ngSubmit)="onSubmit()">
+    <h2>Connexion</h2>
+    <div>
+        <input type="text" formControlName="username" placeholder="username" [disabled] = "isLoading()"/>
+        @if (form.controls.username.errors?.['required']){
+            <small> Login Obligatoire ! </small>
+        }
+        @if (form.controls.username.errors?.['minlength']){
+            <small> Taille minimale de 2 characteres</small>
+        }
+    </div>
+    <div>
+        <input type="password" formControlName="password" placeholder="password" [disabled] = "isLoading()"/>
+        @if (form.controls.password.errors?.['required']){
+            <small> Mot de passe Obligatoire ! </small>
+        }
+        @if (form.controls.password.errors?.['minlength']){
+            <small> Taille minimale de 3 characteres</small>
+        }
+    </div>
+
+    @if (isLoading()){
+        <p class="loading">Connexion en cours ...</p>
+    }
+
+    @if (error()){
+        <p class="error">{{error()}}</p>
+    }
+    <button type="submit" [disabled] = "form.invalid || isLoading()">{{ isLoading() ? 'Connexion...' : 'Se connecter' }}</button>
+</form>

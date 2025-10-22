@@ -46,9 +46,8 @@ export class Formulaire {
     })
   }
 
-  onSubmit(event : Event) : void{
-    event.preventDefault(); 
-
+  onSubmit() : void{
+    
     const payload : Omit<StudentDto, 'id'> = {
       firstname : this.form.value.firstname as string,
       name : this.form.value.name as string,
