@@ -1,6 +1,5 @@
 import { Injectable, signal } from '@angular/core';
 import { StudentDto } from '../../types/student-dto';
-import { find } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

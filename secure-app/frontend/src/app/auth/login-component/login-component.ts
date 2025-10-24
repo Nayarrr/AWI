@@ -28,6 +28,9 @@ export class LoginComponent {
       password : this.form.value.password as string,
     }
     this.authSvs.login(user.username, user.password)
+    if(this.authSvs.error == null){
+      this.router.navigate(['Home'])
+    }
   }
 } 
 
