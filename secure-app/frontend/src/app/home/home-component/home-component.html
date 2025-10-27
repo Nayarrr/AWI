@@ -1,1 +1,7 @@
-<p>home-component works!</p>
+@if(this.authSvs.isLoggedIn()){
+    <p>Vous etes a la maison {{currentUser?.login}}</p>
+}
+
+@if(!this.authSvs.isLoggedIn()){
+    <p>Vous n'êtes pas connecté </p>
+}

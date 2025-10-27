@@ -16,7 +16,7 @@ export class UserService {
   readonly users = this._users.asReadonly()
 
   add(user: Omit<UserDto, 'id'>): void {
-    this.http.post<UserDto>(`${environment.apiUrl}/users`, user).pipe(
+    this.http.post<UserDto>(`${environment.apiUrl}/users`, user, {withCredentials : true}).pipe( //withCredentials OBLIGATOIRE sinon ca passe pas le middleware token-managment
       tap(newUser => this._users.update(list => [...list, newUser])),
       catchError(err => {
         console.error('Erreur ajout:', err);
@@ -26,7 +26,7 @@ export class UserService {
   }
 
   remove(id: number): void {
-    this.http.delete(`${environment.apiUrl}/users/${id}`).pipe(
+    this.http.delete(`${environment.apiUrl}/users/${id}`, {withCredentials : true}).pipe(
       tap(() => this._users.update(list => list.filter(u => u.id !== id))),
       catchError(err => {
         console.error('Erreur suppression:', err);
@@ -40,7 +40,7 @@ export class UserService {
   }
 
   loadAll(): void {
-    this.http.get<UserDto[]>(`${environment.apiUrl}/users`).pipe(
+    this.http.get<UserDto[]>(`${environment.apiUrl}/users`, {withCredentials : true}).pipe(
       tap(users => this._users.set(users)),
       catchError(err => {
         console.error(' Erreur chargement utilisateurs:', err);

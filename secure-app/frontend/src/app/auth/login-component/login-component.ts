@@ -18,18 +18,18 @@ export class LoginComponent {
   error = this.authSvs.error
 
   readonly form = new FormGroup({
-    username : new FormControl<string>('', {nonNullable : true, validators : [Validators.required, Validators.minLength(2)]}),
+    login : new FormControl<string>('', {nonNullable : true, validators : [Validators.required, Validators.minLength(2)]}),
     password : new FormControl<string>('', {nonNullable : true, validators : [Validators.required,  Validators.minLength(3)]})
   })
   
-  onSubmit() : void{
+  async onSubmit(){
     const user : Omit<UserDto, 'id' | 'email' | 'role'> = {
-      username : this.form.value.username as string,
+      login : this.form.value.login as string,
       password : this.form.value.password as string,
     }
-    this.authSvs.login(user.username, user.password)
-    if(this.authSvs.error == null){
-      this.router.navigate(['Home'])
+    await this.authSvs.login(user.login, user.password)
+    if (this.authSvs.isLoggedIn()){
+      this.router.navigate(['/home'])
     }
   }
 } 

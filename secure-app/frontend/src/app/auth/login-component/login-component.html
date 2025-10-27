@@ -1,11 +1,11 @@
 <form [formGroup] = "form" (ngSubmit)="onSubmit()">
     <h2>Connexion</h2>
     <div>
-        <input type="text" formControlName="username" placeholder="username" [disabled] = "isLoading()"/>
-        @if (form.controls.username.errors?.['required']){
+        <input type="text" formControlName="login" placeholder="login" [disabled] = "isLoading()"/>
+        @if (form.controls.login.errors?.['required']){
             <small> Login Obligatoire ! </small>
         }
-        @if (form.controls.username.errors?.['minlength']){
+        @if (form.controls.login.errors?.['minlength']){
             <small> Taille minimale de 2 characteres</small>
         }
     </div>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../auth/auth-service';
 
 @Component({
   selector: 'app-home-component',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './home-component.scss'
 })
 export class HomeComponent {
-
+  authSvs = inject(AuthService)
+  currentUser = this.authSvs.currentUser()
 }
