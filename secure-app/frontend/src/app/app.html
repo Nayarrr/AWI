@@ -1,9 +1,9 @@
 <nav>
   @if(!authService.isLoggedIn()){
-    <a routerLink="Login" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Login</a>
+    <a routerLink="login" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Login</a>
   }
   @if (authService.isAdmin()){
-    <a routerLink="Admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Admin</a>
+    <a routerLink="admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Admin</a>
   }
   @if (authService.isLoggedIn()){
     <button (click)="authService.logout()">Déconnexion</button>

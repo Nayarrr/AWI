@@ -19,7 +19,7 @@ export class UserService {
     this.http.post<UserDto>(`${environment.apiUrl}/users`, user).pipe(
       tap(newUser => this._users.update(list => [...list, newUser])),
       catchError(err => {
-        console.error('❌ Erreur ajout:', err);
+        console.error('Erreur ajout:', err);
         return of(null); // Renvoie null pour indiquer l'échec
       })
     ).subscribe();
@@ -29,7 +29,7 @@ export class UserService {
     this.http.delete(`${environment.apiUrl}/users/${id}`).pipe(
       tap(() => this._users.update(list => list.filter(u => u.id !== id))),
       catchError(err => {
-        console.error('❌ Erreur suppression:', err);
+        console.error('Erreur suppression:', err);
         return of(null);
       })
     ).subscribe();
@@ -44,7 +44,7 @@ export class UserService {
       tap(users => this._users.set(users)),
       catchError(err => {
         console.error(' Erreur chargement utilisateurs:', err);
-        return of([]); // Renvoie un tableau vide → _users.set([])
+        return of([]); // of crée un observable qui renvoi un tableau vide -> _users.set([]) pour que subscribe fonctionne malgré une erreur 
       })
     ).subscribe();
   }

@@ -5,7 +5,7 @@ import { authGuard } from './auth/auth-guard';
 import { adminGuard } from './admin/admin-guard';
 
 export const routes: Routes = [
-    { path : '', redirectTo : '/Login', pathMatch : 'full'}, //pathMatch ne revoit que si l'URL est exactement comme decrite c'est a dire sans rien derriere. Sinon boucle infinie car chaque URL commence techniquement par une chaine vide
-    { path : 'Login', component : LoginComponent, title : 'Login'},
-    { path : 'Admin', component : AdminComponent, title : 'Admin', canActivate : [authGuard,adminGuard]}
+    { path : '', redirectTo : '/login', pathMatch : 'full'}, //pathMatch ne renvoit que si l'URL est exactement comme decrite c'est a dire sans rien derriere. Sinon boucle infinie car chaque URL commence techniquement par une chaine vide
+    { path : 'login', component : LoginComponent, title : 'Login'},
+    { path : 'admin', component : AdminComponent, title : 'Admin', canActivate : [authGuard,adminGuard]}
 ];
